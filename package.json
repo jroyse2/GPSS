@@ -1,22 +1,36 @@
 {
-  "name": "my-firebase-app",
+  "name": "gpss",
   "version": "1.0.0",
-  "description": "A Firebase web application",
-  "main": "index.js",
+  "description": "A Next.js Firebase web application with Supabase",
+  "engines": {
+    "node": "22.x"
+  },
   "scripts": {
-    "start": "node index.js",
-    "build": "echo 'Build completed'",
-    "dev": "node index.js",
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
     "deploy": "firebase deploy"
   },
-  "engines": {
-    "node": "18"
-  },
   "dependencies": {
-    "express": "^4.18.2"
+    "next": "^14.2.5",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "express": "^4.18.2",
+    "firebase": "^12.2.1",
+    "@supabase/supabase-js": "^2.45.0"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "@types/node": "^20.14.10",
+    "@types/react": "^18.3.3",
+    "@types/react-dom": "^18.3.0",
+    "eslint": "^8.57.0",
+    "eslint-config-next": "^14.2.5",
+    "typescript": "^5.5.3"
+  },
   "keywords": [
+    "nextjs",
+    "supabase",
     "firebase",
     "web-app"
   ],
