@@ -1,0 +1,58 @@
+// create-admin.js
+const { Pool } = require('pg');
+const bcrypt = require('bcryptjs');
+require('dotenv').config();
+
+// Database connection
+const pool = new Pool({
+  host: process.env.DB_HOST || 'db.dvwmdutgtlewphqhqbhr.supabase.co',
+  port: parseInt(process.env.DB_PORT || '5432'),
+  database: process.env.DB_NAME || 'postgres',
+  user: process.env.DB_USER || 'postgres',
+  password: process.env.DB_PASSWORD || '_Snmmpmdlf03!',
+  ssl: { rejectUnauthorized: false }
+});
+
+async function createAdminUser() {
+  try {
+    // Hash password
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash('admin123', salt);
+    
+    console.log('Generated password hash:', hashedPassword);
+    
+    // Check if admin user already exists
+    const checkQuery = 'SELECT * FROM users WHERE email = $1';
+    const checkResult = await pool.query(checkQuery, ['admin@example.com']);
+    
+    if (checkResult.rows.length > 0) {
+      console.log('Admin user already exists. Updating password...');
+      
+      // Update password
+      const updateQuery = 'UPDATE users SET password = $1 WHERE email = $2 RETURNING *';
+      const updateResult = await pool.query(updateQuery, [hashedPassword, 'admin@example.com']);
+      
+      console.log('Admin password updated:', updateResult.rows[0]);
+    } else {
+      console.log('Creating new admin user...');
+      
+      // Create admin user
+      const insertQuery = `
+        INSERT INTO users (username, email, password, role)
+        VALUES ($1, $2, $3, $4)
+        RETURNING *
+      `;
+      
+      const values = ['admin', 'admin@example.com', hashedPassword, 'admin'];
+      const result = await pool.query(insertQuery, values);
+      
+      console.log('Admin user created:', result.rows[0]);
+    }
+  } catch (error) {
+    console.error('Error managing admin user:', error);
+  } finally {
+    pool.end();
+  }
+}
+
+createAdminUser();

@@ -1,0 +1,159 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Open+Sans:wght@300;400;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 248, 249, 250;
+  --background-end-rgb: 255, 255, 255;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 33, 37, 41;
+    --background-end-rgb: 52, 58, 64;
+  }
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(
+      to bottom,
+      transparent,
+      rgb(var(--background-end-rgb))
+    )
+    rgb(var(--background-start-rgb));
+  min-height: 100vh;
+}
+
+/* Fix for input text color - ensure inputs always have black text on white background */
+input, 
+textarea, 
+select,
+.form-input,
+.form-textarea,
+.form-select {
+  color: #000000 !important; /* Force black text */
+  background-color: #ffffff !important; /* Force white background */
+}
+
+/* Ensure placeholder text is visible */
+input::placeholder,
+textarea::placeholder,
+select::placeholder,
+.form-input::placeholder,
+.form-textarea::placeholder {
+  color: #6B7280 !important; /* Gray text for placeholders */
+}
+
+/* For dark mode - adjust colors to maintain readability */
+@media (prefers-color-scheme: dark) {
+  input, 
+  textarea, 
+  select,
+  .form-input,
+  .form-textarea,
+  .form-select {
+    color: #ffffff !important; /* White text in dark mode */
+    background-color: #374151 !important; /* Dark gray background in dark mode */
+  }
+  
+  input::placeholder,
+  textarea::placeholder,
+  select::placeholder,
+  .form-input::placeholder,
+  .form-textarea::placeholder {
+    color: #9CA3AF !important; /* Lighter gray for dark mode placeholders */
+  }
+}
+
+/* For class-based dark mode */
+.dark input,
+.dark textarea,
+.dark select,
+.dark .form-input,
+.dark .form-textarea,
+.dark .form-select {
+  color: #ffffff !important; /* White text in dark mode */
+  background-color: #374151 !important; /* Dark gray background in dark mode */
+}
+
+.dark input::placeholder,
+.dark textarea::placeholder,
+.dark select::placeholder,
+.dark .form-input::placeholder,
+.dark .form-textarea::placeholder {
+  color: #9CA3AF !important; /* Lighter gray for dark mode placeholders */
+}
+
+@layer components {
+  .btn {
+    @apply px-4 py-2 rounded-md font-medium transition-colors duration-200;
+  }
+  
+  .btn-primary {
+    @apply bg-primary text-white hover:bg-primary-dark;
+  }
+  
+  .btn-secondary {
+    @apply bg-secondary text-white hover:bg-secondary-dark;
+  }
+  
+  .btn-success {
+    @apply bg-success text-white hover:bg-success/90;
+  }
+  
+  .btn-danger {
+    @apply bg-danger text-white hover:bg-danger/90;
+  }
+  
+  .btn-outline {
+    @apply border border-primary text-primary hover:bg-primary hover:text-white;
+  }
+  
+  .card {
+    @apply bg-white dark:bg-gray-800 rounded-lg shadow-md p-6;
+  }
+  
+  .form-input {
+    @apply w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent;
+    color: #000000 !important; /* Ensure black text */
+    background-color: #ffffff !important; /* Ensure white background */
+  }
+  
+  .dark .form-input {
+    color: #ffffff !important; /* White text in dark mode */
+    background-color: #374151 !important; /* Dark gray background in dark mode */
+  }
+  
+  .form-label {
+    @apply block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1;
+  }
+  
+  .form-error {
+    @apply text-sm text-danger mt-1;
+  }
+  
+  .badge {
+    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium;
+  }
+  
+  .badge-success {
+    @apply bg-green-100 text-green-800;
+  }
+  
+  .badge-warning {
+    @apply bg-yellow-100 text-yellow-800;
+  }
+  
+  .badge-danger {
+    @apply bg-red-100 text-red-800;
+  }
+  
+  .badge-info {
+    @apply bg-blue-100 text-blue-800;
+  }
+}
