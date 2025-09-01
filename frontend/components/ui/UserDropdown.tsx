@@ -42,9 +42,13 @@ const UserDropdown: React.FC<UserDropdownProps> = ({ onClose }) => {
     >
       {/* User info */}
       <div className="px-4 py-3 border-b border-gray-200 dark:border-gray-700">
-        <p className="text-sm font-medium text-gray-900 dark:text-white">{user?.username}</p>
+        <p className="text-sm font-medium text-gray-900 dark:text-white">
+          {user?.user_metadata?.username || user?.email?.split('@')[0] || 'User'}
+        </p>
         <p className="text-xs text-gray-500 dark:text-gray-400 truncate">{user?.email}</p>
-        <p className="text-xs font-medium text-primary mt-1 capitalize">{user?.role}</p>
+        <p className="text-xs font-medium text-primary mt-1 capitalize">
+          {user?.user_metadata?.role || 'user'}
+        </p>
       </div>
 
       {/* Menu items */}
