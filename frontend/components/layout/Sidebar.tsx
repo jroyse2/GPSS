@@ -87,9 +87,9 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, setIsOpen }) => {
           {/* User info */}
           <div className="px-4 mb-6">
             <p className="text-sm font-medium text-gray-500 dark:text-gray-400">Logged in as</p>
-            <p className="text-sm font-bold text-gray-900 dark:text-white">{user?.username}</p>
+                      <p className="text-sm font-bold text-gray-900 dark:text-white">{user?.user_metadata?.username}</p>
             <p className="text-xs text-gray-500 dark:text-gray-400">{user?.email}</p>
-            <p className="text-xs font-medium text-primary mt-1 capitalize">{user?.role}</p>
+                      <p className="text-xs font-medium text-primary mt-1 capitalize">{user?.user_metadata?.role}</p>
           </div>
 
           {/* Navigation */}
@@ -122,7 +122,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, setIsOpen }) => {
             </div>
 
             {/* Admin navigation */}
-            {user?.role === 'admin' && (
+                      {user?.user_metadata?.role === 'admin' && (
               <div className="mb-4">
                 <p className="px-3 text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-2">
                   Administration
