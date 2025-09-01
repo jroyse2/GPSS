@@ -76,7 +76,7 @@ const Navbar: React.FC<NavbarProps> = ({ sidebarOpen, setSidebarOpen }) => {
                 aria-label="User menu"
               >
                 <UserCircleIcon className="h-8 w-8 mr-1" />
-                <span className="hidden md:block">{user?.username}</span>
+                              <span className="hidden md:block">{user?.user_metadata?.username}</span>
               </button>
 
               {/* User dropdown */}
