@@ -169,7 +169,7 @@ const PipeOptimizationResults: React.FC<PipeOptimizationResultsProps> = ({ resul
         className="print:shadow-none print:border"
         action={
           <Button 
-            variant="text" 
+            variant="link" 
             onClick={() => setShowDetails(!showDetails)}
             className="print:hidden"
           >
