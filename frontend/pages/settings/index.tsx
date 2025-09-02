@@ -166,7 +166,9 @@ const SettingsPage: React.FC = () => {
             {/* Account information */}
             <div>
               <div className="text-sm font-medium text-gray-500 dark:text-gray-400">Username</div>
-              <div className="mt-1 text-sm text-gray-900 dark:text-white">{user?.username}</div>
+              <div className="mt-1 text-sm text-gray-900 dark:text-white">
+                {user?.user_metadata?.username || user?.email?.split('@')[0] || 'User'}
+              </div>
             </div>
             <div>
               <div className="text-sm font-medium text-gray-500 dark:text-gray-400">Email</div>
@@ -175,7 +177,7 @@ const SettingsPage: React.FC = () => {
             <div>
               <div className="text-sm font-medium text-gray-500 dark:text-gray-400">Role</div>
               <div className="mt-1 text-sm text-gray-900 dark:text-white capitalize">
-                {user?.role}
+                {user?.user_metadata?.role || 'user'}
               </div>
             </div>
           </div>
