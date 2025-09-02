@@ -35,7 +35,7 @@ const ProfilePage: React.FC = () => {
     formState: { errors: profileErrors },
   } = useForm<ProfileFormData>({
     defaultValues: {
-      username: user?.username || '',
+      username: user?.user_metadata?.username || '',
       email: user?.email || '',
     },
   });
@@ -170,7 +170,7 @@ const ProfilePage: React.FC = () => {
                 <div>
                   <div className="text-sm font-medium text-gray-500 dark:text-gray-400">Role</div>
                   <div className="mt-1 text-sm text-gray-900 dark:text-white capitalize">
-                    {user?.role}
+                    {user?.user_metadata?.role || 'user'}
                   </div>
                 </div>
                 <div>
