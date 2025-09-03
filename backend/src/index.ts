@@ -21,10 +21,17 @@ dotenv.config();
 const app = express();
 const port = process.env.PORT || 5000;
 
+// Define allowed origins for CORS
+const allowedOrigins = [
+  'http://localhost:3000', // Local development
+  'https://gpss-dmi4-test4-ch319th3d-justins-projects-f8f5b49f.vercel.app', // Your Vercel frontend
+  process.env.FRONTEND_URL, // Environment variable override
+].filter(Boolean); // Remove any undefined values
+
 // Middleware
 app.use(helmet());
 app.use(cors({
-  origin: process.env.FRONTEND_URL || 'http://localhost:3000',
+  origin: allowedOrigins,
   credentials: true
 }));
 app.use(morgan('dev'));
@@ -72,9 +79,12 @@ app.all('*', (req: Request, res: Response, next: NextFunction) => {
 // Error handling middleware - IMPORTANT: This must be after all routes
 app.use(errorHandler);
 
-// Start server
-app.listen(port, () => {
-  console.log(`Server running on port ${port}`);
-});
+// Start server (only if not in Vercel environment)
+if (process.env.NODE_ENV !== 'production' || !process.env.VERCEL) {
+  app.listen(port, () => {
+    console.log(`Server running on port ${port}`);
+  });
+}
 
+// Export for Vercel
 export default app;
