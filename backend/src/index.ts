@@ -39,6 +39,22 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
+// Root route
+app.get('/', (req: Request, res: Response) => {
+  res.status(200).json({
+    status: 'success',
+    message: 'Capstone Portal API Server',
+    version: '1.0.0',
+    endpoints: {
+      health: '/api/health',
+      users: '/api/users',
+      jobs: '/api/jobs',
+      pipeOptimization: '/api/pipe-optimization',
+      notifications: '/api/notifications'
+    }
+  });
+});
+
 // Routes
 app.use('/api/users', userRoutes);
 app.use('/api/jobs', jobRoutes);
